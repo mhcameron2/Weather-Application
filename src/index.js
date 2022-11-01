@@ -63,13 +63,21 @@ function displayWeatherCondition(response) {
   document.querySelector("#min-temp").innerHTML = Math.round(
     response.data.main.temp_min
   );
-  /*   document.querySelector("#sunrise").innerHTML = new Date(
-    response.data.sys.sunrise * 1000
-  ); */
-  /*   document.querySelector("#sunset").innerHTML = new Date(
-    response.data.sys.sunset * 1000
-  ); */
-  console.log(response.data);
+  let sunriseUnix = response.data.sys.sunrise;
+  sunriseTime = new Date(sunriseUnix * 1000);
+  sunrise = sunriseTime.toLocaleString("en-gb", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  document.querySelector("#sunrise").innerHTML = `${sunrise}`;
+
+  let sunsetUnix = response.data.sys.sunset;
+  sunsetTime = new Date(sunsetUnix * 1000);
+  sunset = sunsetTime.toLocaleString("en-gb", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  document.querySelector("#sunset").innerHTML = `${sunset}`;
 }
 
 function searchLocation(position) {
